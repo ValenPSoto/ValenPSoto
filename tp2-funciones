@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+int EsMayor(int a, int b, int c);
+
+int main(){
+	int n1,n2,n3;
+	
+	cout<<"ingresar un numero"<<endl;
+	cin>>n1;
+	
+	cout<<"ingresar otro numero"<<endl;
+	cin>>n2;
+	
+	cout<<"ingresar otro numero"<<endl;
+	cin>>n3;
+	
+	cout<<"el mayor es:"<<(EsMayor(n1,n2,n3))<<endl;
+	
+	return 0;
+}
+
+	int EsMayor(int a, int b, int c){
+		int max;
+			if(a>b||c){
+				max=a;
+			}
+			if (b>a||c){
+				max=b;
+			}
+			if (c>a||b){
+				max=c;
+			}
+			
+			return max;
+		
+	}
