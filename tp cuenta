@@ -1,0 +1,124 @@
+#include <string>
+
+#include <iostream>
+
+using namespace std;
+
+class CCuenta {
+
+private:
+
+string titular;
+
+double cantidad;
+
+public:
+
+CCuenta(string, double);
+
+void ingresar(double cantidad);
+
+void retirar(double cantidad);
+
+string getTitular();
+
+void setTitular(string);
+
+double getCantidad();
+
+void setCantidad(double);
+
+};
+
+CCuenta::CCuenta(string titular, double cantidad) {
+
+this->titular = titular;
+
+this->cantidad = cantidad;
+
+}
+
+void CCuenta::ingresar(double cantidad) {
+
+if (cantidad > 0) {
+
+this->cantidad += cantidad;
+
+}
+
+}
+
+void CCuenta::retirar(double cantidad) {
+
+if (this->cantidad - cantidad < 0) {
+
+this->cantidad = 0;
+
+} else {
+
+this->cantidad -= cantidad;
+
+}
+
+}
+
+string CCuenta::getTitular() {
+
+return titular;
+
+}
+
+void CCuenta::setTitular(string titular) {
+
+this->titular = titular;
+
+}
+
+double CCuenta::getCantidad() {
+return cantidad;
+
+}
+
+void CCuenta::setCantidad(double cantidad) {
+
+this->cantidad = cantidad;
+
+}
+
+int main() {
+
+string titular;
+
+double cantidadInicial, cantidadIngresar, cantidadRetirar;
+
+cout << "Ingrese el nombre del titular de la cuenta: ";
+
+getline(cin, titular);
+
+cout << "Ingrese la cantidad inicial en la cuenta: ";
+
+cin >> cantidadInicial;
+
+CCuenta cuenta(titular, cantidadInicial);
+
+cout << "Ingrese la cantidad a ingresar en la cuenta: ";
+
+cin >> cantidadIngresar;
+
+cuenta.ingresar(cantidadIngresar);
+
+cout << "Ingrese la cantidad a retirar de la cuenta: ";
+
+cin >> cantidadRetirar;
+
+cuenta.retirar(cantidadRetirar);
+
+cout << "\nInformación de la cuenta:\n";
+
+cout << "Titular: " << cuenta.getTitular() << endl;
+
+cout << "Cantidad: " << cuenta.getCantidad() << endl;
+
+return 0;
+
+}
