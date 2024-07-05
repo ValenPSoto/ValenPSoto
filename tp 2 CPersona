@@ -1,0 +1,86 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class CPersona {
+private:
+    string nombre;
+    int edad;
+    string DNI;
+    char genero;
+    float peso;
+    float altura;
+
+    char comprobarGenero(char genero) {
+        if (genero != 'H' && genero != 'M') {
+            return 'H';
+        }
+        return genero;
+    }
+
+public:
+    static const int PESO_BAJO = -1;
+    static const int PESO_IDEAL = 0;
+    static const int SOBREPESO = 1;
+
+    CPersona(string nombre = "", int edad = 0, string DNI = "", char genero = 'H', float peso = 0.0, float altura = 0.0)
+        : nombre(nombre), edad(edad), DNI(DNI), genero(comprobarGenero(genero)), peso(peso), altura(altura) {}
+
+    int calcularIMC() {
+        if (altura > 0) {
+            float imc = peso / (altura * altura);
+            if (imc < 20) {
+                return PESO_BAJO;
+            } else if (imc >= 20 && imc <= 25) {
+                return PESO_IDEAL;
+            } else {
+                return SOBREPESO;
+            }
+        }
+        return -99; // Error, altura no puede ser 0
+    }
+
+    bool esMayorDeEdad() {
+        return edad >= 18;
+    }
+
+    void setNombre(string nombre) {
+        this->nombre = nombre;
+    }
+
+    void setEdad(int edad) {
+        this->edad = edad;
+    }
+
+    void setDNI(string DNI) {
+        this->DNI = DNI;
+    }
+
+    void setGenero(char genero) {
+        this->genero = comprobarGenero(genero);
+    }
+
+    void setPeso(float peso) {
+        this->peso = peso;
+    }
+
+    void setAltura(float altura) {
+        this->altura = altura;
+    }
+
+    // Métodos para obtener los valores de los atributos
+    string getNombre() const { return nombre; }
+    int getEdad() const { return edad; }
+    string getDNI() const { return DNI; }
+    char getGenero() const { return genero; }
+    float getPeso() const { return peso; }
+    float getAltura() const { return altura; }
+};
+
+int main() {
+    CPersona persona("Juan", 25, "12345678A", 'H', 70, 1.75);
+    cout << "IMC: " << persona.calcularIMC() << endl; // Debería devolver 0 (peso ideal)
+    cout << "Mayor de edad: " << (persona.esMayorDeEdad() ? "Sí" : "No") << endl; // Debería devolver Sí
+
+    return 0;
+}
