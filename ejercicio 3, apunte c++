@@ -1,0 +1,45 @@
+include <iostream>
+#include <stdlib.h>
+using namespace std;
+
+class Alumno {
+private:
+    string nombre;
+    int findeSemanaPerdidos;
+
+public:
+    Alumno(string , int);
+        void MostrarNombre(); 
+void MostarfindeSemanaPerdidos(); {}
+
+    string getNombre() const {
+        return nombre;
+    }
+
+    int getfindeSemanaPerdidos() const {
+        return findeSemanaPerdidos;
+    }
+};
+class EncuestaAlumno : public Alumno {
+private:
+    bool sirveMateria;
+
+public:
+    EncuestaAlumno(string _nombre, int _findeSemanaPerdidos, bool _sirveMateria)
+       void MostrarAlumno(_nombre, _findeSemanaPerdidos), sirveMateria(_sirveMateria) {}
+
+    bool debeIncluirEnListado() const {
+        return !sirveMateria || findeSemanaPerdidos < 5;
+    }
+};
+int main() {
+    vector<EncuestaAlumno> alumnos = {
+        EncuestaAlumno("Bautista", 3, true),
+        EncuestaAlumno("Maria", 6, false),
+        EncuestaAlumno("Pedro", 4, true),
+        EncuestaAlumno("Camila", 7, true)
+    };
+
+    cout << "Alumnos que responden NO o tienen menos de 5 fines de semana perdidos:" << endl;
+    for (const auto& alumno : alumnos) {
+        if (alumno.debeIncl
