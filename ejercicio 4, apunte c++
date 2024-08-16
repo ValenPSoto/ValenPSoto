@@ -1,0 +1,67 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+class CPassword {
+private:
+    int longitud;
+    string contraseña;
+
+    int contarCaracteres(const string& str, char inicio, char fin) const {
+        int contador = 0;
+        for (char c : str) {
+            if (c >= inicio && c <= fin) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+public:
+    CPassword() : longitud(8) {
+        generarPassword();
+    }
+
+    bool esFuerte() const {
+        int mayusculas = contarCaracteres(contraseña, 'A', 'Z');
+        int minusculas = contarCaracteres(contraseña, 'a', 'z');
+        int numeros = contarCaracteres(contraseña, '0', '9');
+
+        return (mayusculas > 2 && minusculas > 1 && numeros > 5);
+    }
+
+    void generarPassword() {
+        const string caracteres = "Afhi783G";
+        contraseña.clear();
+        srand(time(0));
+        for (int i = 0; i < longitud; i++) {
+            contraseña += caracteres[rand() % caracteres.size()];
+        }
+    }
+    
+    string getContraseña() const {
+        return contraseña;
+    }
+
+    int getLongitud() const {
+        return longitud;
+    }
+
+    void setLongitud(int nuevaLongitud) {
+        longitud = nuevaLongitud;
+        generarPassword();
+    }
+};
+
+int main() {
+    CPassword password; 
+    cout << "Contraseña generada: " << password.getContraseña() << endl;
+    cout << "¿Es fuerte la contraseña? " << (password.esFuerte() ? "Sí" : "No") << endl;
+
+    password.setLongitud(12); 
+    cout << "Nueva contraseña generada: " << password.getContraseña() << endl;
+    cout << "¿Es fuerte la nueva contraseña? " << (password.esFuerte() ? "Sí" : "No") << endl;
+
+    return 0;
+}
